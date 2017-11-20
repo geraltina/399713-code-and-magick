@@ -31,9 +31,9 @@ window.renderStatistics = function (ctx, names, times) {
   var maxIndex = -1;
 
   for (var i = 0; i < times.length; i++) {
-    var time = times[i];
-    if (time > max) {
-      max = time;
+    var value = times[i];
+    if (value > max) {
+      max = value;
       maxIndex = i;
     }
   }
@@ -50,11 +50,11 @@ window.renderStatistics = function (ctx, names, times) {
   var lineHeight = 15;
   var colorBlue = 'rgba(65, 105, 225, 1)';
   var colorRed = 'rgba(255, 0, 0, 1)';
-  var getRect = function (index, timesIndex) {
-    ctx.fillRect(initialX + indent * index, initialY, barWidth, timesIndex * step);
+  var getRect = function (index, time) {
+    ctx.fillRect(initialX + indent * index, initialY, barWidth, time * step);
   };
-  var wrightText = function (index, namesIndex) {
-    ctx.fillText(namesIndex, initialX + indent * index, initialY - lineHeight - histogramHeight);
+  var writeText = function (index, name) {
+    ctx.fillText(name, initialX + indent * index, initialY - lineHeight - histogramHeight);
   };
   var getRandomBlueColor = function () {
     ctx.fillStyle = 'rgba(65, 105, 225, ' + Math.random() + ')';
@@ -65,13 +65,13 @@ window.renderStatistics = function (ctx, names, times) {
       ctx.fillStyle = colorRed;
       getRect(j, -times[j]);
       ctx.fillStyle = colorBlue;
-      wrightText(j, names[j]);
+      writeText(j, names[j]);
       getRandomBlueColor();
     } else {
       getRandomBlueColor();
       getRect(j, -times[j]);
       ctx.fillStyle = colorBlue;
-      wrightText(j, names[j]);
+      writeText(j, names[j]);
       getRandomBlueColor();
     }
   }
