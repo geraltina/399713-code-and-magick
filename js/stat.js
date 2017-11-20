@@ -50,29 +50,29 @@ window.renderStatistics = function (ctx, names, times) {
   var lineHeight = 15;
   var colorBlue = 'rgba(65, 105, 225, 1)';
   var colorRed = 'rgba(255, 0, 0, 1)';
-  var makeARect = function () {
-    ctx.fillRect(initialX + indent * j, initialY, barWidth, -times[j] * step);
+  var getRect = function (index, timesIndex) {
+    ctx.fillRect(initialX + indent * index, initialY, barWidth, timesIndex * step);
   };
-  var wrightAText = function () {
-    ctx.fillText(names[j], initialX + indent * j, initialY - lineHeight - histogramHeight);
+  var wrightText = function (index, namesIndex) {
+    ctx.fillText(namesIndex, initialX + indent * index, initialY - lineHeight - histogramHeight);
   };
-  var makeBlueColorOpacity = function () {
+  var getRandomBlueColor = function () {
     ctx.fillStyle = 'rgba(65, 105, 225, ' + Math.random() + ')';
   };
 
   for (var j = 0; j < times.length; j++) {
     if (names[j] === 'Вы') {
       ctx.fillStyle = colorRed;
-      makeARect();
+      getRect(j, -times[j]);
       ctx.fillStyle = colorBlue;
-      wrightAText();
-      makeBlueColorOpacity();
+      wrightText(j, names[j]);
+      getRandomBlueColor();
     } else {
-      makeBlueColorOpacity();
-      makeARect();
+      getRandomBlueColor();
+      getRect(j, -times[j]);
       ctx.fillStyle = colorBlue;
-      wrightAText();
-      makeBlueColorOpacity();
+      wrightText(j, names[j]);
+      getRandomBlueColor();
     }
   }
 };
