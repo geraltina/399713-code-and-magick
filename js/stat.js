@@ -63,16 +63,11 @@ window.renderStatistics = function (ctx, names, times) {
   for (var j = 0; j < times.length; j++) {
     if (names[j] === 'Вы') {
       ctx.fillStyle = colorRed;
-      getRect(j, -times[j]);
-      ctx.fillStyle = colorBlue;
-      writeText(j, names[j]);
-      getRandomBlueColor();
     } else {
       getRandomBlueColor();
-      getRect(j, -times[j]);
-      ctx.fillStyle = colorBlue;
-      writeText(j, names[j]);
-      getRandomBlueColor();
     }
+    getRect(j, -times[j]);
+    ctx.fillStyle = colorBlue;
+    writeText(j, names[j]);
   }
 };
