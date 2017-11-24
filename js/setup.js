@@ -66,28 +66,15 @@ var getNameAndSurname = function (arrayOne, arrayTwo) {
   return arrayOne[getRandomArrayIndex(arrayOne)] + ' ' + arrayTwo[getRandomArrayIndex(arrayTwo)];
 };
 
-var wizards = [
-  {
+var wizards = [];
+
+for (var j = 0; j < 4; j++) {
+  wizards[wizards.length] = {
     name: getNameAndSurname(NAMES, SURNAMES),
     coatColor: getRandomArrayWord(COATCOLORS),
     eyesColor: getRandomArrayWord(EYESCOLORS)
-  },
-  {
-    name: getNameAndSurname(NAMES, SURNAMES),
-    coatColor: getRandomArrayWord(COATCOLORS),
-    eyesColor: getRandomArrayWord(EYESCOLORS)
-  },
-  {
-    name: getNameAndSurname(NAMES, SURNAMES),
-    coatColor: getRandomArrayWord(COATCOLORS),
-    eyesColor: getRandomArrayWord(EYESCOLORS)
-  },
-  {
-    name: getNameAndSurname(NAMES, SURNAMES),
-    coatColor: getRandomArrayWord(COATCOLORS),
-    eyesColor: getRandomArrayWord(EYESCOLORS)
-  }
-];
+  };
+}
 
 var renderWizard = function (arrayElement) {
   var wizardElement = setupWizardTemplate.cloneNode(true);
