@@ -1,13 +1,6 @@
 'use strict';
 
-var setup = document.querySelector('.setup');
-var setupOpen = document.querySelector('.setup-open');
-var setupClose = document.querySelector('.setup-close');
-var setupSimilar = document.querySelector('.setup-similar');
-var setupListElement = document.querySelector('.setup-similar-list');
-var setupWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-
-var names = [
+var NAMES = [
   'Иван',
   'Хуан Себастьян',
   'Мария',
@@ -18,7 +11,7 @@ var names = [
   'Вашингтон'
 ];
 
-var surnames = [
+var SURNAMES = [
   'да Марья',
   'Верон',
   'Мирабелла',
@@ -29,7 +22,7 @@ var surnames = [
   'Ирвинг'
 ];
 
-var coatColors = [
+var COATCOLORS = [
   'rgb(101, 137, 164)',
   'rgb(241, 43, 107)',
   'rgb(146, 100, 161)',
@@ -38,13 +31,20 @@ var coatColors = [
   'rgb(0, 0, 0)'
 ];
 
-var eyesColors = [
+var EYESCOLORS = [
   'black',
   'red',
   'blue',
   'yellow',
   'green'
 ];
+
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = document.querySelector('.setup-close');
+var setupSimilar = document.querySelector('.setup-similar');
+var setupListElement = document.querySelector('.setup-similar-list');
+var setupWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
 setupOpen.addEventListener('click', function () {
   setup.classList.remove('hidden');
@@ -58,8 +58,8 @@ var getRandomArrayIndex = function (array) {
   return Math.floor(Math.random() * array.length);
 };
 
-var getRandomArrayWord = function (arrayOne) {
-  return arrayOne[getRandomArrayIndex(arrayOne)];
+var getRandomArrayWord = function (array) {
+  return array[getRandomArrayIndex(array)];
 };
 
 var getNameAndSurname = function (arrayOne, arrayTwo) {
@@ -68,33 +68,33 @@ var getNameAndSurname = function (arrayOne, arrayTwo) {
 
 var wizards = [
   {
-    name: getNameAndSurname(names, surnames),
-    coatColor: getRandomArrayWord(coatColors),
-    eyesColor: getRandomArrayWord(eyesColors)
+    name: getNameAndSurname(NAMES, SURNAMES),
+    coatColor: getRandomArrayWord(COATCOLORS),
+    eyesColor: getRandomArrayWord(EYESCOLORS)
   },
   {
-    name: getNameAndSurname(names, surnames),
-    coatColor: getRandomArrayWord(coatColors),
-    eyesColor: getRandomArrayWord(eyesColors)
+    name: getNameAndSurname(NAMES, SURNAMES),
+    coatColor: getRandomArrayWord(COATCOLORS),
+    eyesColor: getRandomArrayWord(EYESCOLORS)
   },
   {
-    name: getNameAndSurname(names, surnames),
-    coatColor: getRandomArrayWord(coatColors),
-    eyesColor: getRandomArrayWord(eyesColors)
+    name: getNameAndSurname(NAMES, SURNAMES),
+    coatColor: getRandomArrayWord(COATCOLORS),
+    eyesColor: getRandomArrayWord(EYESCOLORS)
   },
   {
-    name: getNameAndSurname(names, surnames),
-    coatColor: getRandomArrayWord(coatColors),
-    eyesColor: getRandomArrayWord(eyesColors)
+    name: getNameAndSurname(NAMES, SURNAMES),
+    coatColor: getRandomArrayWord(COATCOLORS),
+    eyesColor: getRandomArrayWord(EYESCOLORS)
   }
 ];
 
-var renderWizard = function () {
+var renderWizard = function (arrayElement) {
   var wizardElement = setupWizardTemplate.cloneNode(true);
 
-  wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizards[i].coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizards[i].eyesColor;
+  wizardElement.querySelector('.setup-similar-label').textContent = arrayElement.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = arrayElement.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = arrayElement.eyesColor;
 
   return wizardElement;
 };
