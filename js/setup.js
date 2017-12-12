@@ -89,28 +89,27 @@ var onPopupEscPress = function (evt) {
   }
 };
 
-var openPopup = function () {
+var openPopup = function (evt) {
   setup.classList.remove('hidden');
 
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
-      setup.classList.add('hidden');
-    }
+  document.addEventListener('keydown', function () {
+    onPopupEscPress();
   });
 
   // If input with name is valid, closes popup, else - doesn't
-  if (userNameInput.validity === true) {
+  if (userNameInput.validity === true && !userNameInput.onfocus) {
     setupSubmit.addEventListener('click', function () {
       closePopup();
     });
 
-    setupSubmit.addEventListener('keydown', function (evt) {
+    setupSubmit.addEventListener('keydown', function () {
       if (evt.keyCode === ENTER_KEYCODE) {
         closePopup();
       }
     });
   } else {
-    setup.classList.remove('hidden');
+    evt.preventDefault();
+    openPopup();
   }
 };
 
